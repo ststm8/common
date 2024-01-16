@@ -7,4 +7,6 @@
 #error dont know what STM8 MCU
 #endif
 
+#include "types.h"
+
 #endif

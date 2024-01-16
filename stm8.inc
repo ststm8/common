@@ -1,13 +1,13 @@
 CC=sdcc
 INCLUDES=-Iheaders/include
-CFLAGS=-mstm8 --std-c23 $(INCLUDES) -D $(STM8_MCU)
+CFLAGS=-D$(STM8_MCU) $(INCLUDES) -mstm8 --std-c23
 LDFLAGS=-mstm8
 PS=powershell -NoProfile -NonInteractive
 MKDIR =	$(PS) "New-Item -ItemType Directory $(1) | Out-Null"
 
 .PHONY: clean all folders
 
-all: folders build/main.ihx build/main.elf
+all: folders build/main.ihx
 
 hdrs := $(wildcard *.h)
 srcs := $(wildcard *.c)
@@ -29,10 +29,6 @@ objs := $(patsubst %.c,build/%.rel,$(srcs))
 build/main.ihx : $(objs)
 	@echo *** LINKING HEX
 	$(CC) $(LDFLAGS) $^ -o $@
-
-build/main.elf : $(objs)
-	@echo *** LINKING ELF
-	$(CC) $(LDFLAGS) --debug --out-fmt-elf $^ -o $@
 
 build/%.rel: %.c
 	$(CC) $(CFLAGS) -c $? -o $@
