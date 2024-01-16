@@ -1,6 +1,6 @@
 CC=sdcc
 INCLUDES=-Iheaders/include
-CFLAGS=-D$(STM8_MCU) $(INCLUDES) -mstm8 --std-c23
+CFLAGS=-D$(STM8_MCU) -DSTM8_FREQ=$(STM8_FREQ) $(INCLUDES) -mstm8 --std-c23
 LDFLAGS=-mstm8
 PS=powershell -NoProfile -NonInteractive
 MKDIR =	$(PS) "New-Item -ItemType Directory $(1) | Out-Null"
@@ -24,7 +24,9 @@ folders: build $(build_fldrs)
 
 include $(mods)
 
-objs := $(patsubst %.c,build/%.rel,$(srcs))
+modules_srcs := $(foreach f,$(fldrs),$(wildcard $(f)*.c))
+
+objs := $(patsubst %.c,build/%.rel,$(srcs)) $(patsubst %.c,build/%.rel,$(modules_srcs))
 
 build/main.ihx : $(objs)
 	@echo *** LINKING HEX
