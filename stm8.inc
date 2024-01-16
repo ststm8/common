@@ -25,6 +25,7 @@ folders: build $(build_fldrs)
 include $(mods)
 
 modules_srcs := $(foreach f,$(fldrs),$(wildcard $(f)*.c))
+modules_hdrs := $(foreach f,$(fldrs),$(wildcard $(f)*.h))
 
 objs := $(patsubst %.c,build/%.rel,$(srcs)) $(patsubst %.c,build/%.rel,$(modules_srcs))
 
@@ -32,8 +33,8 @@ build/main.ihx : $(objs)
 	@echo *** LINKING HEX
 	$(CC) $(LDFLAGS) $^ -o $@
 
-build/%.rel: %.c
-	$(CC) $(CFLAGS) -c $? -o $@
+build/%.rel: %.c $(hdrs) $(srcs) $(modules_hdrs) $(modules_srcs)
+	$(CC) $(CFLAGS) -c $< -o $@
 
 clean:
 	$(PS) "if (Test-Path build) { rm -r build }"
