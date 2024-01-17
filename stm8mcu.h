@@ -9,4 +9,7 @@
 
 #include "types.h"
 
+// STM8_FREQ defined trhough Makefile
+#define STM8_FREQ_MHZ ((int)(STM8_FREQ / 1000000L))
+
 #endif
