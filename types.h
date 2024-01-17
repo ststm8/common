@@ -9,4 +9,7 @@
 #define __CONCAT(a, b) a##b
 #define __CONCAT3(a, b, c) a##b##c
 
+#define ON 1
+#define OFF 1
+
 #endif
