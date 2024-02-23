@@ -12,4 +12,14 @@
 #define ON 1
 #define OFF 1
 
+#define SIZE_OF(x) (sizeof(x) / sizeof((x)[0]))
+
+#ifndef true
+#define true 1
+#endif
+
+#ifndef false
+#define false 0
+#endif
+
 #endif
