@@ -3,8 +3,12 @@
 
 #ifdef STM8S105K4
 #include <STM8S105K4.h>
+#elif STM8L101K3
+#include <STM8L101K3.h>
+#elif STM8S103K3
+#include <STM8S103K3.h>
 #else
-#error dont know what STM8 MCU
+#error unknown STM8 MCU
 #endif
 
 #include "types.h"
