@@ -10,6 +10,9 @@ typedef struct
     uint8_t b;
 } RGB_t;
 
-#define RGB(r, g, b) ((RGB_t){.r = r, .g = g, .b = b})
+#define RGB(R, G, B)           \
+    {                          \
+        .r = R, .g = G, .b = B \
+    }
 
 #endif
